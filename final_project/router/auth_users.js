@@ -40,7 +40,6 @@ regd_users.post("/login", (req, res) => {
 regd_users.put("/auth/review/:isbn", (req, res) => {
   //Write your code here
   const token = req.headers['authorization'];
-
   if (!token) {
     return res.status(401).json({ message: "Authorization token is required" });
   }
@@ -57,7 +56,6 @@ regd_users.put("/auth/review/:isbn", (req, res) => {
     if (!review) {
       return res.status(400).json({ message: "Review is required" });
     }
-
     if (!books[isbn]) {
       return res.status(404).json({ message: "Book not found" });
     }
@@ -66,9 +64,7 @@ regd_users.put("/auth/review/:isbn", (req, res) => {
     if (!books[isbn].reviews) {
       books[isbn].reviews = {};
     }
-
     books[isbn].reviews[username] = review;
-
     return res.status(200).json({ message: "Review successfully added/updated" });
   });
 });
