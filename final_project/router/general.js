@@ -48,7 +48,7 @@ public_users.get('/', function (req, res) {
 // Get the book list available in the shop using async-await with Axios
 public_users.get('/axios', async function (req, res) {
   try {
-    const response = await axios.get('http://localhost:3000'); // Adjust the URL to match your server's URL
+    const response = await axios.get('http://localhost:5000');
     const bookList = JSON.stringify(response.data.books, null, 2);
     return res.status(200).json({ books: bookList });
   } catch (error) {
@@ -88,11 +88,11 @@ public_users.get('/isbn/:isbn', function (req, res) {
 });
 
 // Get book details based on ISBN using async-await with Axios
-public_users.get('/isbn/:isbn', async function (req, res) {
+public_users.get('/isbn/axios/:isbn', async function (req, res) {
   const isbn = req.params.isbn;
 
   try {
-    const response = await axios.get(`http://localhost:3000/book/${isbn}`); // Adjust the URL to match your server's URL
+    const response = await axios.get(`http://localhost:5000/book/${isbn}`);
     return res.status(200).json(response.data);
   } catch (error) {
     if (error.response && error.response.status === 404) {
@@ -141,7 +141,7 @@ public_users.get('/author/axios/:author', async function (req, res) {
   const author = req.params.author;
 
   try {
-    const response = await axios.get('http://localhost:3000'); // Adjust the URL to match your server's URL
+    const response = await axios.get('http://localhost:5000'); 
     const booksByAuthor = Object.values(response.data.books).filter(book => book.author === author);
 
     if (booksByAuthor.length > 0) {
@@ -174,7 +174,7 @@ public_users.get('/title/axios/:title', async function (req, res) {
   const title = req.params.title;
 
   try {
-    const response = await axios.get('http://localhost:3000'); // Adjust the URL to match your server's URL
+    const response = await axios.get('http://localhost:5000');
     const booksByTitle = Object.values(response.data.books).filter(book => book.title === title);
 
     if (booksByTitle.length > 0) {
